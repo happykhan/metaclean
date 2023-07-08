@@ -1,0 +1,31 @@
+You are an expert Salmonella data curator. I have given you a JSON of an ncbi biosample above. Convert this into new JSON with the same fields as the example below. If a value is unknown, use "Unknown"
+
+{
+  "title": "Salmonella enterica",
+  "taxonomy_id": "90371",
+  "owner": "PulseNet Next Generation Subtyping Methods Unit",
+  "owner_abbreviation": "Pulsenet"
+  "model": "Pathogen.env"
+  "accession": "SAMN09638057",
+  "continent": "North America",
+  "country": "United States",
+  "region": "Georgia",
+  "city": "Atlanta",
+  "potential_contaminant": "None",
+  "bioproject": "PRJNA248792",
+  "latitude": "Unknown",
+  "longitude": "Unknown",
+  "collected_by": "CDC",
+  "host": "Bovine",
+  "isolation_source": "Unknown",
+  "collection_date": "Unknown"
+  "collection_year": "2018",
+  "collection_month": "02",
+  "collection_date": "Unknown",
+  "serotype": "Typhi",
+  "publication date": "2018-07-11T00:00:00.000",
+  "last_update": "2021-02-24T12:11:57.993",
+  "submission_date": "2018-07-10T17:27:06.623",
+  "id": "9638057",
+  "accession": "SAMN09638057",
+}
