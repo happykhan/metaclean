@@ -100,7 +100,7 @@ def create_prompt(biosample_details, eb_prompt_dir):
         os.makedirs(eb_prompt_dir)
     for biosample in biosample_details:
         biosample_string = ','.join([str(key) + ':' + str(value) for key, value in biosample.items()])
-        prompt = "Given the ncbi biosample information. {}. Assign the record to one of the following host categories: {}. Only reply with the category".format(biosample_string, ','.join(eb_host_categories))
+        prompt = "Given the ncbi biosample information. {}. Assign the record to one of the following host categories: {}. Only reply with the category. Use Not determined if not sure.".format(biosample_string, ','.join(eb_host_categories))
         with open("{}/{}.txt".format(eb_prompt_dir, biosample['Sample ID']), 'w') as f:
             # Word wrap prompt to 80 characters
             prompt = textwrap.fill(prompt, width=80)
