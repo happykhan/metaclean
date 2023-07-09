@@ -1,6 +1,6 @@
 import os
-import json
 import logging
+import typer
 
 # Set up logging to stdout
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')

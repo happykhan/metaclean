@@ -19,7 +19,9 @@ categories from EnteroBase, as the table below shows, can
 
 ## A cold start
 
-One approach is to give  (without any specific training)
+One approach is to give the chatgpt the NCBI biosample metadata and ask it to classify into one of the EnteroBase fields (without any specific training). This will allow us to assess chatgpt's 
+success in replicating EnteroBase, without having to develop our own curated test set. Keep in mind, the EnteroBase classifications are not perfect so this is not evidence that chatgpt can or can not 
+provide true classification. 
 
 A list of the possible values for source type in EnteroBase.
 ```
