@@ -4,6 +4,7 @@ import logging
 import csv 
 import typer
 import pandas as pd
+import gzip 
 
 # Set up logging to stdout
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
@@ -66,7 +67,9 @@ def output_fields(fields, fields_path="biosamples/fields.csv"):
         fields_path (str): The path to the CSV file where the fields will be written.
                         Defaults to "biosamples/fields.csv".
     """
-    os.makedirs(os.path.dirname(fields_path), exist_ok=True)
+    fields_file_dir = os.path.dirname(fields_path)
+    if fields_file_dir and not os.path.exists(fields_file_dir):
+        os.makedirs(os.path.dirname(fields_file_dir), exist_ok=True)
     with open(fields_path, "w") as f:
         # write header
         f.write('field,first_seen\n')
@@ -74,7 +77,7 @@ def output_fields(fields, fields_path="biosamples/fields.csv"):
         for field, acc in fields.items():
             f.write(f'{field},{acc}\n')
 
-def create_attribute_csv(fields_path, biosample_path, output_table='all_attributes.csv'):
+def create_attribute_csv(fields_path, biosample_path, output_table='all_attributes.csv.gz'):
     """
     Creates a CSV file containing the biosample attributes.
 
@@ -99,10 +102,12 @@ def create_attribute_csv(fields_path, biosample_path, output_table='all_attribut
             with open(biosample_file_path) as f:
                 try:
                     dict_data = json.load(f)
+                    accession = os.path.basename(biosample_file_path).split('.')[0]
                     # make a new dictionary with all the keys from fields using the data from dict_data, if a field is not present, use None
                     if dict_data.get("Attributes", {}):
                         attributes = dict_data.get("Attributes", {}).get("Attribute", {})
                         new_record = {field: None for field in fields}
+                        new_record['Sample ID'] = accession
                         for attribute in attributes:
                             if isinstance(attribute, str):
                                 attribute = dict_data.get("Attributes", {}).get("Attribute", [])                        
@@ -113,8 +118,8 @@ def create_attribute_csv(fields_path, biosample_path, output_table='all_attribut
                 except json.decoder.JSONDecodeError as e:
                     logging.error(f"Could not parse {biosample_path}: {e}") 
                     continue
-    with open(output_table, 'w') as f:
-        writer = csv.DictWriter(f, fieldnames=fields)
+    with gzip.open(output_table, 'wt') as f:
+        writer = csv.DictWriter(f, fieldnames=["Sample ID"] + fields)
         writer.writeheader()
         writer.writerows(all_attributes)
 
@@ -141,10 +146,14 @@ def get_data(output_table):
 
 
 
-def main(biosample_path:str="biosamples/", fields_path:str="biosamples/fields.csv", output_table:str='all_attributes.csv'):
-    # fields = biosample_fields(biosample_path=biosample_path)
-    # output_fields(fields, fields_path=fields_path)
-    # create_attribute_csv(fields_path, biosample_path, output_table=output_table)
+def main(biosample_path:str="biosamples/", fields_path:str="fields.csv", output_table:str='all_attributes.csv.gz'):
+    logging.info('Fetching fields...')
+    fields = biosample_fields(biosample_path=biosample_path)
+    logging.info('Writing fields to file...')
+    output_fields(fields, fields_path=fields_path)
+    logging.info('Writing attribute table to file...')
+    create_attribute_csv(fields_path, biosample_path, output_table=output_table)
+    logging.info('Building dataframe...')
     get_data(output_table)
 
 if __name__ == "__main__":

@@ -1,0 +1,293 @@
+field,first_seen
+strain,SAMN15894674
+collected_by,SAMN15894674
+collection_date,SAMN15894674
+isolation_source,SAMN15894674
+geo_loc_name,SAMN15894674
+lat_lon,SAMN15894674
+serovar,SAMN15894674
+sub_species,SAMN15894674
+attribute_package,SAMN15894069
+ontological term,SAMN15894069
+IFSAC+ Category,SAMN15894069
+source_type,SAMN15894069
+isolate_name_alias,SAMN15894069
+Contact Information,SAMN33006046
+isolate,SAMN33005602
+host,SAMN33005602
+host_disease,SAMN33005602
+sequence_type,SAMN18767314
+potential_contaminant,SAMN18767314
+PublicAccession,SAMN10728282
+ProjectAccession,SAMN10728282
+Species,SAMN10728282
+Genus,SAMN10728282
+project_name,SAMN10720034
+sequenced_by,SAMN10720034
+subgroup,SAMN10724727
+FDA_Lab_Id,SAMN10724001
+FDA_lab_id,SAMN12414062
+sample_type,SAMN15366316
+submitted_serotype,SAMN19321662
+submitted_serovar,SAMN19321662
+HHS_region,SAMN03952472
+host_age,SAMN03952472
+culture_collection,SAMN03952472
+package,SAMN03959417
+serotype,SAMN03959612
+description,SAMN14426498
+env_broad_scale,SAMN14420221
+env_local_scale,SAMN14420221
+env_medium,SAMN14420221
+isol_growth_condt,SAMN14420221
+num_replicons,SAMN14420221
+ref_biomaterial,SAMN14420221
+genotype,SAMN08851804
+passage_history,SAMN08851804
+pathotype,SAMN08851804
+specimen_voucher,SAMN08851804
+subtype,SAMN08851804
+PFGE_PrimaryEnzyme_pattern,SAMN09698193
+narms_isolate_number,SAMN13323750
+attribute package,SAMN21021583
+LexMapr Version,SAMN17170964
+host type,SAMN17171106
+species,SAMN10173700
+genus,SAMN10173700
+N/A,SAMN13207407
+AntigenForm,SAMN02595887
+outbreak,SAMN02595837
+PFGE_SecondaryEnzyme_pattern,SAMN02595851
+host_disease_outcome,SAMN06972159
+serogroup,SAMN05263497
+Antigenic Formula,SAMN05263497
+NML-Guelph sample ID,SAMN05263497
+biomaterial_provider,SAMN03356960
+host_sex,SAMN04571738
+host_subject_id,SAMN04571738
+sample_id,SAMN01081629
+fda_lab_id,SAMN01087977
+NML#,SAMN07617766
+id_number,SAMN19548596
+Phage_Type,SAMN10268357
+sample_nml_number,SAMN20181488
+type-material,SAMN34055374
+label,SAMN02908542
+Tax ID,SAMN02908608
+subsrc_note,SAMN02900140
+alternate strain name,SAMN02904629
+ifsac_category,SAMN02900554
+host_description,SAMN32641338
+host_disease_stage,SAMN32641338
+host_health_state,SAMN32641338
+host_tissue_sampled,SAMN32641338
+alternate_ID,SAMN16987172
+Organisation name,SAMN12250464
+SPUID namespace,SAMN12250464
+outbreak/sporadic,SAMN15963373
+lot_number,SAMN10620577
+antigenic formula,SAMN03569138
+No.,SAMN18292764
+altitude,SAMN18292764
+Instrument model,SAMN17043321
+Library name,SAMN17043321
+FLAG sample,SAMN33699150
+Project,SAMN30619227
+Travel History,SAMN34542259
+reference_material,SAMN01823732
+type_strain,SAMN01823712
+IFSAC+ category,SAMN04244271
+Contact Info,SAMN34570940
+isolate type,SAMN00754430
+note,SAMN08470424
+AssemblyVersion,SAMN03988324
+SequencingTechnology,SAMN03988324
+ENA first public,SAMEA5851870
+ENA last update,SAMEA5851870
+ENA-CHECKLIST,SAMEA5851870
+External Id,SAMEA5851870
+INSDC center alias,SAMEA5851870
+INSDC center name,SAMEA5851870
+INSDC first public,SAMEA5851870
+INSDC last update,SAMEA5851870
+INSDC status,SAMEA5851870
+Submitter Id,SAMEA5851870
+broker name,SAMEA5851870
+common name,SAMEA5851870
+completeness score,SAMEA5851870
+contamination score,SAMEA5851870
+investigation_type,SAMEA5851870
+sample derived from,SAMEA5851870
+sample_name,SAMEA5851870
+Isolation type,SAMN13896402
+AMR phenotypes,SAMN12745981
+Resistance Profiles,SAMN02941142
+temp,SAMN17506944
+FDA CVM ID,SAMN06050731
+CFSAN number,SAMN06050731
+timepoint_(hours),SAMN12082812
+cecum_id,SAMN12082812
+isolate_id,SAMN12082812
+antibiotic_resistance,SAMN12082812
+time of collection,SAMN32471679
+reptile_origin,SAMN17845845
+Phage Type,SAMN04156749
+Antibiotic Resistance Pattern,SAMN04156749
+PFGE_XbaI,SAMN04156749
+PFGE_BlnI,SAMN04156749
+COUNTRYORIGIN,SAMN26198784
+RAISINGCLAIM1,SAMN26198784
+MEATCUT,SAMN26198784
+UID,SAMN04363853
+sample,SAMN32717722
+NCBI Sample Category,SAMN03577426
+identification method,SAMN03255434
+Laboratory Host,SAMN03255434
+Extraction Method,SAMN03255434
+Extraction Date,SAMN03255434
+Passage Date,SAMN03255434
+LD50_no_of_organisms,SAMN03837474
+sequence type,SAMN15925966
+Replicate,SAMN31476800
+accession,SAMN15447836
+note_serovar,SAMN15447836
+variety,SAMN06309456
+MLVS (Australian nomenclature),SAMN06309456
+MLST,SAMN06309456
+base_sample,SAMN17094472
+inoculation_route,SAMN17094472
+experiment,SAMN17094472
+replicate,SAMN17094449
+trial,SAMN17094507
+hexadecynoic_acid,SAMN17094507
+resistance_pattern,SAMN17094507
+BioSampleModel,SAMN00862074
+ecotype,SAMN15596653
+misc_param,SAMN15596653
+contact_email,SAMN33584183
+contact_lab,SAMN33584183
+Toxin,SAMN03610016
+orgmod_note,SAMN05301533
+Phage type,SAMN03840891
+MLVA,SAMN03840891
+Antigenic formulae,SAMN08514271
+Contact,SAMN11841112
+amniotic_fluid_color,SAMN32873775
+biotic_relationship,SAMN32873775
+blood_blood_disord,SAMN32873775
+chem_administration,SAMN32873775
+diet_last_six_month,SAMN32873775
+drug_usage,SAMN32873775
+encoded_traits,SAMN32873775
+estimated_size,SAMN32873775
+ethnicity,SAMN32873775
+extrachrom_elements,SAMN32873775
+foetal_health_stat,SAMN32873775
+gestation_state,SAMN32873775
+health_state,SAMN32873775
+host_body_mass_index,SAMN32873775
+host_body_product,SAMN32873775
+host_body_temp,SAMN32873775
+host_diet,SAMN32873775
+host_family_relationship,SAMN32873775
+host_genotype,SAMN32873775
+host_height,SAMN32873775
+host_hiv_stat,SAMN32873775
+host_last_meal,SAMN32873775
+host_occupation,SAMN32873775
+host_phenotype,SAMN32873775
+host_pulse,SAMN32873775
+host_taxid,SAMN32873775
+host_tot_mass,SAMN32873775
+ihmc_medication_code,SAMN32873775
+kidney_disord,SAMN32873775
+maternal_health_stat,SAMN32873775
+medic_hist_perform,SAMN32873775
+nose_throat_disord,SAMN32873775
+omics_observ_id,SAMN32873775
+organism_count,SAMN32873775
+oxy_stat_samp,SAMN32873775
+pathogenicity,SAMN32873775
+perturbation,SAMN32873775
+pet_farm_animal,SAMN32873775
+pulmonary_disord,SAMN32873775
+rel_to_oxygen,SAMN32873775
+samp_collect_device,SAMN32873775
+samp_mat_process,SAMN32873775
+samp_salinity,SAMN32873775
+samp_size,SAMN32873775
+samp_store_dur,SAMN32873775
+samp_store_loc,SAMN32873775
+samp_store_temp,SAMN32873775
+samp_vol_we_dna_ext,SAMN32873775
+smoker,SAMN32873775
+source_material_id,SAMN32873775
+study_complt_stat,SAMN32873775
+subspecf_gen_lin,SAMN32873775
+travel_out_six_month,SAMN32873775
+trophic_level,SAMN32873775
+twin_sibling,SAMN32873775
+urine_collect_meth,SAMN32873775
+urogenit_tract_disor,SAMN32873775
+weight_loss_3_month,SAMN32873775
+State,SAMN00991042
+purpose_of_sampling,SAMN35712350
+Antigen,SAMN10236727
+NML sample ID,SAMN10236727
+Contributing Laboratory,SAMN10236727
+env_package,SAMN00710620
+outbreak_number,SAMN04334638
+Phagetype,SAMN04334638
+specimen_processing,SAMN36050379
+specimen_processing_id,SAMN36050379
+specimen_processing_details,SAMN36050379
+Identifier; CFSAN,SAMN07210938
+animal_env,SAMN29834561
+VirulenceMarker,SAMN02335403
+submitted_strain,SAMN05210136
+ID,SAMN13053094
+Lab,SAMN30723263
+panel_id,SAMN04014968
+intended_consumer,SAMN30167392
+Assembly_type,SAMN12688791
+food_origin,SAMN34421752
+ST,SAMN09508547
+growth phase,SAMN15214070
+molecule,SAMN15214070
+isolation_type,SAMN35819916
+Isolate, name or label,SAMN01939053
+Key,SAMN12863031
+received_date,SAMN12863031
+age,SAMN12863031
+WGS_id,SAMN12863031
+LabID,SAMN12863031
+NARMS,SAMN19406514
+breed,SAMN13964341
+dev_stage,SAMN13964341
+depth,SAMN11635174
+identified_by,SAMN11635174
+lab_host,SAMN11635174
+Sample information,SAMN26201029
+contact_info,SAMN13687206
+mating_type,SAMN34226852
+treatment,SAMN17735452
+DPI,SAMN16634224
+treatment_group,SAMN16634224
+beta_lactamase_family,SAMN16634224
+carbapenemase,SAMN16634224
+edta_inhibitor_tested,SAMN16634224
+component_organism,SAMN14088119
+contact_information,SAMN10501887
+varitety,SAMN10408317
+collection_method,SAMN02147119
+Sample_number,SAMN05390905
+Drug resistant pattern,SAMN16709282
+PFGE pattern,SAMN16709282
+assembly,SAMN02712197
+seq_meth,SAMN02712197
+finishing_strategy,SAMN02712197
+annot_source,SAMN02712197
+alias,SAMN02716890
+Keywords,SAMN00778973
+disease,SAMN00778973
+alternative_ID,SAMN03744300
