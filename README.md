@@ -55,7 +55,7 @@ Let's take this is a [simple example of a Biosample](https://www.ncbi.nlm.nih.go
 | BioProject     | PRJNA242847 Salmonella enterica    |
 | Submission     | USDA-FSIS; 2020-08-24              |
 
-This is a very orderly example, but the details are not what quite what I would like for the general classification above.
+This is a very orderly example, but the details are not what quite what I would like for general classification.
 For instance, a human being can infer. 
 
 * The original host animal is Swine - we could even assume domestic pig. 
@@ -68,18 +68,81 @@ not lexographically similar, making it difficult to programmatically collate sim
 very well strutured, we still need to standardise this information for our purposes. 
 
 With recent improvements in large language models, it seems possible that these inferences could be automated. And the aim here, is
-to attempt to automate these inferences (using ChatGPT) and assess performance. 
+to attempt to automate these inferences (using ChatGPT) and assess performance. [ChatGPT](https://chat.openai.com/) descrives itself as:
 
-[ChatGPT](https://chat.openai.com/) descrives itself as:
 ```
 ChatGPT, developed by OpenAI, is an advanced language model based on the GPT (Generative Pre-trained Transformer) architecture. 
 It has been trained on a vast amount of text data from the internet and is designed to generate human-like responses in a conversational manner. 
 ```
 
-## Outline of methods
+## Outline of (proposed) work
 
-* EnteroBase comparison 
-* 
+### Matching EnteroBase's categorisation
+
+This new fangled technology shouls surely match the categorisation by [EnteroBase](doc/metaparser.md). Given some samples with the existing 
+categories from EnteroBase, as the table below shows, can 
+
+| Source Niche   | Source Type                                      | Examples of Source Details    |
+| -------------- | ------------------------------------------------ | ----------------------------- |
+| Aquatic        | Fish; Marine Mammal; Shellfish                   | Tuna, lobster                 |
+| Companion Animal | Canine; Feline                                  | Cat, dog                      |
+| Environment    | Air; Plant; Soil/Dust; Water                     | River, tree, soil             |
+| Feed           | Animal Feed; Meat                                | Dog treat, fishmeal           |
+| Food           | Composite Food; Dairy; Fish; Meat; Shellfish     | Milk, salami, ready-to-eat food |
+| Human          | Human                                            | Patient, biopsy               |
+| Laboratory     | Laboratory                                       | Reference strain, serial passage |
+| Livestock      | Bovine; Camelid; Equine; Ovine; Swine            | Horse, calf                   |
+| Poultry        | Avian                                            | Turkey, chicken               |
+| Wild Animal    | Amphibian; Avian; Bat; Bovine; Camelid; Canine; Deer; Equine; Feline; Invertebrates; Marsupial; Other Mammal; Ovine; Primate; Reptile; Rodent; Swine | Flamingo, frog, python, Spider |
+| ND             | ND                                               | ND                            |
+
+### Comparing EnteroBase's categorisation
+
+
+
+### Standardising host names
+Host names (i.e. the host organism) can often be written as scientific name or common names. So given either 
+a scientific name or common name can it be made consistent like the table below?
+
+| Number | Common Name              | Scientific Name         |
+|--------|--------------------------|-------------------------|
+| 37     | Virginia opossum        | Didelphis virginiana    |
+| 38     | Mountain horned dragon  | Acanthosaura capra      |
+| 39     | Cuttlefish              | Sepia officinalis       |
+| 40     | Common musk turtle      | Sternotherus odoratus   |
+| 41     | Human (female)          | Homo sapiens            |
+| 42     | Water                    | N/A                     |
+| 43     | Hedgehog                | Erinaceus europaeus     |
+| 44     | Eurasian wigeon         | Mareca penelope         |
+| 45     | Domestic goat           | Capra hircus            |
+| 46     | Turkey                   | Meleagris gallopavo     |
+| 47     | Domestic pig             | Sus scrofa domesticus   |
+| 48     | Elephant seal            | Mirounga sp.            |
+| 49     | Spinach                  | Spinacia oleracea       |
+
+### Standardising geographic locations
+Biosample records do not have the same level of completeness, they may only mention the city or the country of collection. In truth, having
+all geographic fields would be best to make samples directly comparable. 
+
+E.g. 
+
+* Sample 1 location. "Paris" 
+* Sample 2 location. "France"
+* Sample 3 location. "London"
+
+If we wanted to include all samples from France, we would want include both samples 1 and 2. Hence, the desired output would be 
+for every sample to have:
+
+* Continent
+* Country
+* State/Province/County
+* City
+* Approxiamate latitude 
+* Approxiamate longitude 
+
+Is this something that could be backfilled?
+
+### 
 
 
 
