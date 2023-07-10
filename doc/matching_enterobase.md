@@ -19,8 +19,8 @@ categories from EnteroBase, as the table below shows, can
 
 ## A cold start
 
-One approach is to give the chatgpt the NCBI biosample metadata and ask it to classify into one of the EnteroBase fields (without any specific training). This will allow us to assess chatgpt's 
-success in replicating EnteroBase, without having to develop our own curated test set. Keep in mind, the EnteroBase classifications are not perfect so this is not evidence that chatgpt can or can not 
+One approach is to give the GPT the NCBI biosample metadata and ask it to classify into one of the EnteroBase fields (without any specific training). This will allow us to assess GPT's 
+success in replicating EnteroBase, without having to develop our own curated test set. Keep in mind, the EnteroBase classifications are not perfect so this is not evidence that GPT can or can not 
 provide true classification. 
 
 A list of the possible values for source type in EnteroBase.
@@ -148,3 +148,4 @@ In the results column, the X means that GPT passed. The eb_error means that ther
 
 In some cases, GPT also added extra text "the record should be ..." when told only to return the category.
 
+So in this first attempt, GPT can correctly classify all the records, better than the EnteroBase. e.g. SAMN15216731 is assigned in EnteroBase as Weasel/Badger (Mustelid), but the metadata only metions "Small intestine" with no other host information. GPT correctly assigns this as "Not determined". However, GPT introduces its own (correct) categories (like Poultry) when it shouldn't.  
