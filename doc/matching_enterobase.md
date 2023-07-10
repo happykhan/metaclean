@@ -55,3 +55,96 @@ Amphibian, Avian, Bat, Bovine, Camelid, Canine, Deer, Equine, Feline, Invertebra
 
 ```
 
+### First attempt
+
+Using the script in `matching_enterobase.py`
+I created some prompts to assign a category for a few biosamples and compared it back with the original classification from Enterobase. The prompts were something
+like:
+
+```
+Given the ncbi biosample information. Sample
+ID:SAMN03083832,collected_by:FDA,isolation_source:rapeseed meal
+canola,attribute_package:environmental/food/other,ontological term:rapeseed
+meal:FOODON_03310043|canola meal:FOODON_00002694,IFSAC+
+Category:seeds,source_type:food. Assign the record to one of the following host
+categories: Camelid,Not determined,Equine,Feline,Marine Mammal,Dairy,Primate,Soi
+l/Dust,Meat,Human,Air,Swine,Deer,Amphibian,Reptile,Bat,Bovine,Shellfish,Marsupia
+l,Invertebrates,Ovine,Water,Canine,Other Mammal,Animal
+Feed,Fish,Rodent,Avian,Plant,Laboratory,Composite Food. Only reply with the
+category. Use Not determined if not sure.
+```
+
+Here are the results for a random selection of biosamples:
+
+Here's the updated table in Markdown format:
+
+
+| Sample_ID    | EB_Source_type            | GPT_Source_type       | Result                              |
+|--------------|---------------------------|-----------------------|-------------------------------------|
+| SAMN02352711 | Plant                     | Plant                 | x                                   |
+| SAMN27768017 | Bovine                    | Animal                | x                                   |
+| SAMN10359333 | Avian                     | Avian                 | x                                   |
+| SAMN31142663 | Water/River               | Not determined        | x                                   |
+| SAMN24442301 | Bovine                    | Meat                  | x                                   |
+| SAMN06481922 | Human                     | Human                 | x                                   |
+| SAMN25002870 | Plant                     | Food                  | x                                   |
+| SAMN14861190 | Human                     | Human                 | x                                   |
+| SAMN13414191 | Human                     | Human                 | x                                   |
+| SAMN12238825 | ND/Others                 | Food                  | fail                                |
+| SAMN17216187 | Human                     | Human                 | x                                   |
+| SAMN33744402 | Poultry                   | Avian                 | x                                   |
+| SAMN08624184 | Poultry                   | Meat                  | x                                   |
+| SAMN02253015 | Fish                      | Fish                  | x                                   |
+| SAMN09431297 | Human                     | Human                 | x                                   |
+| SAMN19548558 | Human                     | The record should be assigned to the "Human" host category. | x                  |
+| SAMN09434936 | Human                     | Human                 | x                                   |
+| SAMN05301281 | Swine                     | Swine                 | x                                   |
+| SAMN10064125 | Swine                     | Swine                 | x                                   |
+| SAMN27754168 | Human                     | Human                 | x                                   |
+| SAMN27024394 | ND/Others                 | Animal                | x                                   |
+| SAMN03894239 | Poultry                   | The record can be assigned to the "Avian" category. | x                           |
+| SAMN06183468 | Poultry                   | Meat                  | x                                   |
+| SAMN15216731 | Weasel/Badger (Mustelid)  | Not determined        | eb_error                            |
+| SAMN02403350 | Bovine                    | Bovine                | x                                   |
+| SAMN16261443 | Bovine                    | Bovine                | x                                   |
+| SAMN30955101 | Poultry                   | Poultry               | fail                                |
+| SAMN09522017 | Human                     | Human                 | x                                   |
+| SAMN09203646 | Human                     | Human                 | x                                   |
+| SAMN12212484 | Swine                     | Swine                 | x                                   |
+| SAMN07514578 | Human                     | Human                 | x                                   |
+| SAMN09916170 | Poultry                   | Avian                 | x                                   |
+| SAMN08929367 | Poultry                   | Avian                 | x                                   |
+| SAMN20960601 | Human                     | Human                 | x                                   |
+| SAMN24657383 | Avian                     | Avian                 | x                                   |
+| SAMN03479563 | Human                     | Human                 | x                                   |
+| SAMN10080287 | Human                     | Human                 | x                                   |
+| SAMN03577268 | Poultry                   | The record should be assigned to the category "Meat". | x                          |
+| SAMN08767345 | Poultry                   | Avian                 | x                                   |
+| SAMN09475168 | Human                     | Human                 | x                                   |
+| SAMN28600665 | Bovine                    | Bovine                | x                                   |
+| SAMN19605052 | Poultry                   | Avian                 | x                                   |
+| SAMN06278516 | Human                     | Human                 | x                                   |
+| SAMN09371598 | Human                     | Human                 | x                                   |
+| SAMN09405169 | Human                     | Not determined        | eb_error                            |
+| SAMN04601104 | Human                     | Human                 | x                                   |
+| SAMN08161536 | Human                     | Human                 | x                                   |
+| SAMN03083832 | Plant                     | AnimalFeed            | eb_error                            |
+| SAMN09100764 | Human                     | Human                 | x                                   |
+| SAMN09770906 | ND/Others                 | Poultry               | fail                                |
+| SAMN11474784 | Human                     | Human                 | x                                   |
+| SAMN16481075 | ND/Others                 | Avian                 | eb_error                            |
+| SAMN03104699 | Human                     | Human                 | x                                   |
+| SAMN07173395 | Human                     | Human                 | x                                   |
+| SAMN12262008 | Human                     | Human                 | x                                   |
+| SAMN07501475 | Poultry                   | The record can be assigned to the "Poultry" category. | fail                       |
+| SAMN08294319 | Avian                     | Meat                  | x                                   |
+| SAMN08567762 | Human                     | Human                 | x                                   |
+| SAMN18675266 | Human                     | The record should be assigned to the "Human" category. | x                          |
+| SAMN02698346 | Fish                      | Shellfish             | eb_error                            |
+| SAMN18820663 | Human                     | Human                 | x                                   |
+
+
+In the results column, the X means that GPT passed. The eb_error means that there the original EnteroBase assignment is actually wrong. Fail in this case is where the category was incorrect. In every fail, GPT correctly assigned the category Poultry or Food to the record, but these were not in the list of valid categories. 
+
+In some cases, GPT also added extra text "the record should be ..." when told only to return the category.
+
