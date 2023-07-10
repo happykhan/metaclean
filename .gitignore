@@ -3,6 +3,7 @@ biosamples/
 output/
 SAMN* 
 prompts/
+metaclean_key
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

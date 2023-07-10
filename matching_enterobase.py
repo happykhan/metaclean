@@ -111,7 +111,39 @@ def create_prompt(biosample_details, eb_prompt_dir):
             prompt = textwrap.fill(prompt, width=80)
             f.write(prompt)    
     return prompt
-                                                                                                                             
+
+def run_prompt():
+    response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {
+        "role": "system",
+        "content": "You will be given sample metadata. Classify the metadata into one of these host categories. Only use the categories given. Reply with the category only. Reply Not determined if unsure\n\nHost categories:\n\nCamelid,\nNot determined,\nEquine,\nFeline,\nMarine mammal,\nDairy,\nPrimate,\nSoil/Dust,\nMeat,\nHuman,\nAir,\nSwine,\nDeer,\nAmphibian,\nReptile,\nBat,\nBovine,\nShellfish,\nMarsupial,\nInvertebrates,\nOvine,\nWater,\nCanine,\nOther Mammal,\nAnimal Feed,\nFish,\nRodent,\nAvian,\nPlant,\nLaboratory,\nComposite Food."
+        },
+        {
+        "role": "user",
+        "content": " SampleID:SAMN13414191,collected_by:PHE,isolation_source:human,host:Homo sapiens"
+        },
+        {
+        "role": "assistant",
+        "content": "Human"
+        },
+        {
+        "role": "user",
+        "content": "Sample ID:SAMN07501475,collected_by:USDA-FSIS,isolation_source:comminuted chicken. "
+        },
+        {
+        "role": "assistant",
+        "content": "Avian"
+        }
+    ],
+    temperature=0,
+    max_tokens=20,
+    top_p=1,
+    frequency_penalty=0,
+    presence_penalty=0
+    )    
+
 def run_missing_prompts(eb_prompt_dir, prompt_output_dir='class', model="gpt-3.5-turbo"):
     openai.organization = "org-HYH3Ehg9p6TomTCnKHyxm1u7"
     openai.api_key = open('metaclean_key', 'r').read().strip()
@@ -126,7 +158,7 @@ def run_missing_prompts(eb_prompt_dir, prompt_output_dir='class', model="gpt-3.5
                 try:
                     if model.startswith('gpt-3') or model.startswith('gpt-4'):
                         response = openai.ChatCompletion.create(model=model, 
-                        messages = [{"role": "user", "content": prompt}], 
+                        messages = [{"role": "user", "content": prompt},{"role": "system", "content": "Only use categories you've been provided with"}], 
                         temperature=0,
                         )
                     else:
@@ -181,7 +213,7 @@ def compare_eb_records(entero_file, prompt_output_dir='class'):
             match_rate += 1
         else:
             logging.warn('No match {}. EB: {} vs GPT: {}. The prompt was: {}'.format(accession, eb_record_result, prompt_results['choices'], prompt_results['prompt']))
-    logging.info('Match rate: {}%'.format(round(match_rate/total * 100)))
+    logging.info('{} out of {}. Match rate: {}%'.format(match_rate, total, round(match_rate/total * 100)))
     # write prompt_comp to file ith dictwriter
     with open('prompt_comp.csv', 'w') as f:
         writer = csv.DictWriter(f, fieldnames=['Sample_ID', 'EB_Source_type', 'GPT_Source_type', 'Prompt'])
@@ -199,7 +231,7 @@ def main(fields:str="fields.csv", data_table:str="all_attributes.csv.gz", entero
     # # Generate prompt text file for each biosample record
     # create_prompt(input_data, eb_prompt_dir)
     # Run missing prompts - careful, this costs money!
-    # run_missing_prompts(eb_prompt_dir)
+    run_missing_prompts(eb_prompt_dir)
     # Compare prompt responses to EnteroBase records
     compare_eb_records(entero_file, prompt_output_dir='class')
 
