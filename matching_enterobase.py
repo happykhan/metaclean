@@ -6,32 +6,8 @@ import openai
 import logging 
 import json 
 import csv
+import time
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
-
-eb_host_categories = list(set([
-    'Fish', 'Marine Mammal', 'Shellfish', 'Canine', 'Feline', 'Air', 'Plant', 'Soil/Dust', 
-    'Water', 'Animal Feed', 'Meat', 'Composite Food', 'Dairy', 'Fish', 'Meat', 'Shellfish', 
-    'Human', 'Laboratory', 'Bovine', 'Camelid', 'Equine', 'Ovine', 'Swine', 'Avian', 
-    'Amphibian', 'Avian', 'Bat', 'Bovine', 'Camelid', 'Canine', 'Deer', 'Equine', 'Feline', 
-    'Invertebrates', 'Marsupial', 'Other Mammal', 'Ovine', 'Primate', 'Reptile', 'Rodent', 
-    'Swine', 'Not determined'
-]))
-
-eb_host_niche = list(set([
-    'Aquatic',
-    'Companion Animal',
-    'Environment',
-    'Feed',
-    'Food',
-    'Human',
-    'Laboratory',
-    'Livestock',
-    'Poultry',
-    'Wild Animal',
-    'Not determined'
-]))
-
-
 
 def fetch_eb_records(entero_file="entero_all_7.7.23.tsv.gz", records=1000):
     """
@@ -43,7 +19,8 @@ def fetch_eb_records(entero_file="entero_all_7.7.23.tsv.gz", records=1000):
     eb_records = df.sample(n=records)
     eb_records = eb_records[['Sample ID', 'Source Type', 'Source Niche']]
     biosample_ids = eb_records['Sample ID'].tolist()
-    return biosample_ids, eb_records
+    values = list(set(df['Source Type'].tolist()))
+    return biosample_ids, eb_records, values
 
 
 
@@ -97,22 +74,20 @@ def fetch_host_info(biosample_ids, data_table, field_list):
         biosample_details.append(new_biosample)
     return biosample_details
 
-def create_prompt(biosample_details, eb_prompt_dir):
+def create_prompt(biosample_details, eb_prompt_dir, values):
     """
     Creates a prompt text file for a biosample.
     """
     if not os.path.exists(eb_prompt_dir):
         os.makedirs(eb_prompt_dir)
     for biosample in biosample_details:
+        accession = biosample.pop('Sample ID')
         biosample_string = ','.join([str(key) + ':' + str(value) for key, value in biosample.items()])
-        prompt = "Given the ncbi biosample information. {}. Assign the record to one of the following host categories: {}. Only reply with the category. Use Not determined if not sure.".format(biosample_string, ','.join(eb_host_categories))
-        with open("{}/{}.txt".format(eb_prompt_dir, biosample['Sample ID']), 'w') as f:
-            # Word wrap prompt to 80 characters
-            prompt = textwrap.fill(prompt, width=80)
+        prompt = "You will be given sample metadata. Classify the metadata into one of these host categories. Only use the categories given. Reply with the category only. Reply Not determined if unsure\nHost categories:\n{}\n::\n{}.".format(','.join(values), biosample_string)
+        with open("{}/{}.txt".format(eb_prompt_dir, accession), 'w') as f:
             f.write(prompt)    
-    return prompt
 
-def run_prompt():
+def run_prompt(prompt):
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[
@@ -122,7 +97,7 @@ def run_prompt():
         },
         {
         "role": "user",
-        "content": " SampleID:SAMN13414191,collected_by:PHE,isolation_source:human,host:Homo sapiens"
+        "content": "collected_by:PHE,isolation_source:human,host:Homo sapiens"
         },
         {
         "role": "assistant",
@@ -130,12 +105,17 @@ def run_prompt():
         },
         {
         "role": "user",
-        "content": "Sample ID:SAMN07501475,collected_by:USDA-FSIS,isolation_source:comminuted chicken. "
+        "content": "collected_by:Minnesota Department Of Health,isolation_source:pig intestine,ontological term:swine:FOODON_03411136, intestine:UBERON_0000160,IFSAC+ Category:veterinary clinical/research| pig,source_type:animal."
         },
         {
         "role": "assistant",
-        "content": "Avian"
-        }
+        "content": "Swine"
+        },
+        {
+        "role": "user",
+        "content": prompt
+        }        
+
     ],
     temperature=0,
     max_tokens=20,
@@ -143,8 +123,9 @@ def run_prompt():
     frequency_penalty=0,
     presence_penalty=0
     )    
+    return response
 
-def run_missing_prompts(eb_prompt_dir, prompt_output_dir='class', model="gpt-3.5-turbo"):
+def run_missing_prompts(eb_prompt_dir, prompt_output_dir='class', model="gpt-3.5-turbo", force=False):
     openai.organization = "org-HYH3Ehg9p6TomTCnKHyxm1u7"
     openai.api_key = open('metaclean_key', 'r').read().strip()
     model_list = [x.id for x in openai.Model.list()['data']]
@@ -154,13 +135,16 @@ def run_missing_prompts(eb_prompt_dir, prompt_output_dir='class', model="gpt-3.5
         for prompt_file in [os.path.join(eb_prompt_dir, x) for x in os.listdir(eb_prompt_dir)]:
             prompt = open(prompt_file, 'r').read().replace('\n', ' ').strip()
             accession = os.path.basename(prompt_file).split('.')[0]
-            if not os.path.exists(os.path.join(prompt_output_dir, accession + '.json')):
+            if not os.path.exists(os.path.join(prompt_output_dir, accession + '.json')) or force:
                 try:
                     if model.startswith('gpt-3') or model.startswith('gpt-4'):
-                        response = openai.ChatCompletion.create(model=model, 
-                        messages = [{"role": "user", "content": prompt},{"role": "system", "content": "Only use categories you've been provided with"}], 
-                        temperature=0,
-                        )
+                        prompt = prompt.split('::')[1]
+                        response = run_prompt(prompt)
+                        # response = openai.ChatCompletion.create(model=model, 
+                        # messages = [{"role": "user", "content": prompt},{"role": "system", "content": "Only use categories you've been provided with"}], 
+                        # temperature=0,
+                        # )
+                        time.sleep(1)                        
                     else:
                         # This probably doesnt work.
                         response = openai.Completion.create(
@@ -206,7 +190,7 @@ def compare_eb_records(entero_file, prompt_output_dir='class'):
         accession = os.path.basename(prompt_file).split('.')[0]
         eb_record = eb_records[eb_records['Sample ID'] == accession]
         eb_record_result = eb_record['Source Type'].values[0]
-        prompt_out_res = {'Sample_ID': accession, 'EB_Source_type': eb_record_result, 'GPT_Source_type': prompt_results['choices'], 'Prompt': prompt_results['prompt']}
+        prompt_out_res = {'Sample_ID': accession, 'EB_Source_type': eb_record_result, 'GPT_Source_type': prompt_results['choices'], 'Prompt': prompt_results['prompt'].strip()}
         prompt_comp.append(prompt_out_res)
         if eb_record_result == prompt_results['choices']:
             logging.info('Matched {}. {}'.format(accession, eb_record_result))
@@ -215,7 +199,7 @@ def compare_eb_records(entero_file, prompt_output_dir='class'):
             logging.warn('No match {}. EB: {} vs GPT: {}. The prompt was: {}'.format(accession, eb_record_result, prompt_results['choices'], prompt_results['prompt']))
     logging.info('{} out of {}. Match rate: {}%'.format(match_rate, total, round(match_rate/total * 100)))
     # write prompt_comp to file ith dictwriter
-    with open('prompt_comp.csv', 'w') as f:
+    with open('prompt_comp.csv', 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=['Sample_ID', 'EB_Source_type', 'GPT_Source_type', 'Prompt'])
         writer.writeheader()
         for row in prompt_comp:
@@ -223,15 +207,15 @@ def compare_eb_records(entero_file, prompt_output_dir='class'):
 
 def main(fields:str="fields.csv", data_table:str="all_attributes.csv.gz", entero_file:str ="entero_all_7.7.23.tsv.gz", num_records:int=100, eb_prompt_dir:str="eb_prompts"):
     # Pick 1000 enterobase records from enterobase_all.7.7.23.tsv
-    # biosample_ids, eb_records = fetch_eb_records(entero_file=entero_file, records=num_records)
-    # # Fetch list of fields and extract valid fields to use for host 
-    # field_list = fetch_field_list(fields)
-    # # Fetch corresponging host information from all_attributes.csv.gz
-    # input_data = fetch_host_info(biosample_ids, data_table, field_list)
-    # # Generate prompt text file for each biosample record
-    # create_prompt(input_data, eb_prompt_dir)
+    biosample_ids, eb_records, values = fetch_eb_records(entero_file=entero_file, records=num_records)
+    # Fetch list of fields and extract valid fields to use for host 
+    field_list = fetch_field_list(fields)
+    # Fetch corresponging host information from all_attributes.csv.gz
+    input_data = fetch_host_info(biosample_ids, data_table, field_list)
+    # Generate prompt text file for each biosample record
+    create_prompt(input_data, eb_prompt_dir, values)
     # Run missing prompts - careful, this costs money!
-    run_missing_prompts(eb_prompt_dir)
+    # run_missing_prompts(eb_prompt_dir)
     # Compare prompt responses to EnteroBase records
     compare_eb_records(entero_file, prompt_output_dir='class')
 
