@@ -4,6 +4,9 @@ output/
 SAMN* 
 prompts/
 metaclean_key
+spacy_model
+s2v_old/
+spacy
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

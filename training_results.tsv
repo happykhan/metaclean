@@ -1,0 +1,101 @@
+Accesion	EB Source Niche	EB Source Type	Predicted Source Type	Perc	Passed	Prompt String
+SAMN02595903	Wild Animal	Deer (Cervidae)	Ovine/Goat (Caprinae)	0.143	NO	moose feces,moose:FOODON_03411257, feces:UBERON_0001988,veterinary clinical/research| other animal,animal
+SAMN34069802	Poultry	Poultry	Poultry	0.126	YES	chicken - young chicken carcass rinse (post-chill)
+SAMN08482362	Animal Feed	Dairy	Dairy	0.177	YES	dairy feed,environmental/food/other,dairy:envo_00003862, food product for animal:foodon_03309997,animal feed,Animal feed
+SAMN02900186	Environment	Water/River	Water/River	0.249	YES	sediment stream,stream sediment:ENVO_00002127,environmental-water,environmental
+SAMN16564868	Laboratory	Laboratory	Water/River	0.249	NO	water filtration membrane,environmental/food/other,water:CHEBI_15377,environmental-water,environmental
+SAMN06213768	Food	Avian	Poultry	0.212	NO	boneless chicken meat,environmental/food/other,chicken boneless:FOODON_00002702|skeletal meat part|without bone or shell:FOODON_03420125,chicken,food
+SAMN03569138	Wild Animal	Invertebrate	Invertebrate	0.189	YES	Perdicinae
+SAMN12587253	Poultry	Poultry	Poultry	0.126	YES	Chicken Whole - cut in lab
+SAMN08114332	Poultry	Poultry	Poultry	0.128	YES	animal-chicken-young chicken
+SAMN08114335	Livestock	Swine	Ovine/Goat (Caprinae)	0.101	NO	animal-swine-sow
+SAMN30813996	Environment	Water/River	Water/River	0.249	YES	Irrigation Canal,environmental/food/other,irrigation canal:ENVO_00000036,environmental-water| environmental-factory/production facility,environmental
+SAMN12041584	Aquatic Animal	Fish	Invertebrate	0.115	NO	Product-Raw-Intact-Siluriformes
+SAMN20219147	Wild Animal	Deer (Cervidae)	Ovine/Goat (Caprinae)	0.1	NO	Feces (Odocoileus virginianus)
+SAMN11809026	Livestock	Equine	Ovine/Goat (Caprinae)	0.143	NO	fecal swab horse,environmental/food/other,feces:UBERON_0001988, swab:NCIT_C17627, horse:FOODON_03411229,veterinary clinical/research| other animal,animal
+SAMN06333679	Wild Animal	Bovine/Antelope	Ovine/Goat (Caprinae)	0.143	NO	antelope intestine (Antilocapra americana),environmental/food/other,antelope:FOODON_03411481, intestine:UBERON_0000160,veterinary clinical/research| other animal,animal
+SAMN06333452	Wild Animal	Camelid	Ovine/Goat (Caprinae)	0.143	NO	intestine camel,environmental/food/other,camel:FOODON_03412103, intestine:UBERON_0000160,veterinary clinical/research| other animal,animal
+SAMN19958347	Wild Animal	Other Mammal	Ovine/Goat (Caprinae)	0.101	NO	wildlife
+SAMN19958293	Wild Animal	Deer (Cervidae)	Ovine/Goat (Caprinae)	0.101	NO	wildlife
+SAMN19958256	Wild Animal	Deer (Cervidae)	Ovine/Goat (Caprinae)	0.101	NO	wildlife
+SAMN09225653	Human	Human	Human	0.161	YES	human,Homo sapiens
+SAMN07341698	Laboratory	Laboratory	Ovine/Goat (Caprinae)	0.072	NO	Isolated Organism
+SAMN10124303	Food	Dairy	Dairy	0.126	YES	Cheese Sauce
+SAMN15940068	Livestock	Swine	Invertebrate	0.085	NO	Product-Raw-Ground, Comminuted or Otherwise Nonintact-Pork
+SAMN07709892	Wild Animal	Camelid	Ovine/Goat (Caprinae)	0.143	NO	lung (Lama glama),environmental/food/other,lama glama:NCBITAXON_9844, lung:UBERON_0002048,veterinary clinical/research| other animal,animal
+SAMN09305139	Human	Human	Human	0.162	YES	stool,70-79
+SAMN11102910	Wild Animal	Deer (Cervidae)	Ovine/Goat (Caprinae)	0.143	NO	Odocoileus virginianus Feces,environmental/food/other,feces:UBERON_0001988, odocoileus virginianus:NCBITAXON_9874,veterinary clinical/research| other animal,animal
+SAMN10910210	Livestock	Bovine	Ovine/Goat (Caprinae)	0.128	NO	Bovine lymph node,bovine
+SAMN13293118	Environment	Animal-related	Animal-related	0.249	YES	environmental wet market informal wood table,environmental/food/other,environmental-factory/production facility,environmental
+SAMN09469518	Aquatic Animal	Shellfish	Ovine/Goat (Caprinae)	0.086	NO	Lepidochyelys olivacea,tissue sample,kidney
+SAMN29012263	Environment	Water/River	Water/River	0.249	YES	dam water,environmental/food/other,dam:ENVO_00000074| water:CHEBI_15377,environmental-water| environmental-factory/production facility,environmental
+SAMN09428135	Companion Animal	Feline	Ovine/Goat (Caprinae)	0.143	NO	feline feces,environmental/food/other,feces:UBERON_0001988, cat:NCIT_C14191,veterinary clinical/research| companion animal,animal
+SAMN12086276	Wild Animal	Rodent	Rodent	0.107	YES	hedgehog
+SAMN19947979	Environment	Water/River	Water/River	0.257	YES	water
+SAMN08775952	Food	Food	Invertebrate	0.074	NO	corn soy blend
+SAMN02664874	Environment	Soil/Dust	Soil/Dust	0.249	YES	drag swab,drag swab:GENEPIO_0002713,environmental,environmental
+SAMN02664857	Environment	Soil/Dust	Soil/Dust	0.249	YES	drag swab,drag swab:GENEPIO_0002713,environmental,environmental
+SAMN22137239	Wild Animal	Weasel/Badger (Mustelid)	Ovine/Goat (Caprinae)	0.126	NO	intestine
+SAMN09630303	Livestock	Ovine/Goat (Caprinae)	Ovine/Goat (Caprinae)	0.143	YES	Lamb,environmental/food/other,lamb:FOODON_03411669,other animal,animal
+SAMN04158396	Wild Animal	Primate	Ovine/Goat (Caprinae)	0.143	NO	monkey,environmental/food/other,monkey:FOODON_03412439,other animal,animal
+SAMN12056345	Livestock	Ovine/Goat (Caprinae)	Ovine/Goat (Caprinae)	0.143	YES	carcass swab (Sheep),environmental/food/other,sheep:FOODON_03411183| carcass:UBERON_0008979| swab:NCIT_C17627,meat| other animal,animal
+SAMN02952730	Wild Animal	Rodent	Rodent	0.143	YES	colon rodent,colon:UBERON_0001155, rodentia:NCBITAXON_9989,veterinary clinical/research| other animal,animal
+SAMN33426659	Food	Avian	Poultry	0.12	NO	Poultry meat
+SAMN04296405	Wild Animal	Marsupial	Ovine/Goat (Caprinae)	0.082	NO	feces little river basin opossum,environmental/food/other,feces:UBERON_0001988, opossum:FOODON_03411450, river:ENVO_00000022, undersea feature:ENVO_00000104,veterinary clinical/research| other animal,animal,Didelphis virginiana
+SAMN04296391	Wild Animal	Primate	Ovine/Goat (Caprinae)	0.105	NO	lemur necropsy (Lemur catta),environmental/food/other,lemur:FOODON_00002955, necropsy:MMO_0000344,veterinary clinical/research| other animal,animal,Lemur catta
+SAMN05513687	Environment	Plant	Invertebrate	0.212	NO	pepper,environmental/food/other,pepper (raw):FOODON_03309928,seeded vegetables (solanaceous),food
+SAMN08885943	Aquatic Animal	Marine Mammal	Ovine/Goat (Caprinae)	0.12	NO	Large intestine
+SAMN18795926	Wild Animal	Invertebrate	Invertebrate	0.212	YES	periwinkle snail,environmental/food/other,snail:FOODON_03412114,mollusks (non-bi-valve),food
+SAMN03577056	Wild Animal	Ovine/Goat (Caprinae)	Ovine/Goat (Caprinae)	0.143	YES	camel lymph node,lymph node:UBERON_0000029, camel:FOODON_03412103,veterinary clinical/research| other animal,animal
+SAMN03255339	Food	Fish	Invertebrate	0.212	NO	offal,environmental/food/other,multi-ingredient,food
+SAMN23442984	Laboratory	Laboratory	Unknown	0.212	NO	
+SAMN09745946	Environment	Environment	Soil/Dust	0.249	NO	environmental swab sponge,environmental/food/other,environmental-factory/production facility,environmental
+SAMN06848342	Environment	Water/River	Water/River	0.249	YES	non tidal fresh water river,environmental/food/other,environmental-water,environmental
+SAMN02846228	Food	Invertebrate	Invertebrate	0.212	YES	cooked snail meat,environmental/food/other,meat (cooked):FOODON_03305103| snail:FOODON_03412114,multi-ingredient| mollusks (non-bi-valve),food
+SAMN02846823	Wild Animal	Invertebrate	Invertebrate	0.212	YES	frozen boiled snail,environmental/food/other,food (boiled):FOODON_00002688|frozen:PATO_0001985|snail:FOODON_03412114,mollusks (non-bi-valve),food
+SAMN02846965	Aquatic Animal	Fish	Invertebrate	0.212	NO	frozen pangasius fish,environmental/food/other,fish (frozen):FOODON_03301083|pangasius:NCBITAXON_8000,fish,food
+SAMN02843621	Wild Animal	Amphibian	Invertebrate	0.212	NO	frozen frog leg,environmental/food/other,frog leg (frozen):FOODON_03305167,other aquatic animals,food
+SAMN02845161	Wild Animal	Invertebrate	Invertebrate	0.212	YES	frozen snail,environmental/food/other,frozen:PATO_0001985|snail:FOODON_03412114,mollusks (non-bi-valve),food
+SAMN02844715	Food	Composite Food	Invertebrate	0.212	NO	lentil fried snack agra taj,environmental/food/other,food (fried):FOODON_00002660| lentil (whole):FOODON_03310641| snack food:FOODON_03315013,multi-ingredient| seeded vegetables (legumes),food
+SAMN02847192	Wild Animal	Rabbit/Hare	Ovine/Goat (Caprinae)	0.212	NO	individually quick frozen whole rabbit,environmental/food/other,other animal,food
+SAMN02843643	Aquatic Animal	Shellfish	Invertebrate	0.212	NO	frozen headless shrimp,environmental/food/other,crustaceans,food
+SAMN02847196	Wild Animal	Rabbit/Hare	Ovine/Goat (Caprinae)	0.101	NO	iqf whole rabbit
+SAMN34534613	Wild Animal	Amphibian	Amphibian	0.088	YES	frog
+SAMN02699491	Livestock	Ovine/Goat (Caprinae)	Ovine/Goat (Caprinae)	0.143	YES	ovine intestine,intestine:UBERON_0000160, sheep:FOODON_03411183,veterinary clinical/research| other animal,animal
+SAMN02698184	Wild Animal	Invertebrate	Invertebrate	0.212	YES	frozen snail,environmental/food/other,frozen:PATO_0001985|snail:FOODON_03412114,mollusks (non-bi-valve),food
+SAMN16814784	Wild Animal	ND/Others	Ovine/Goat (Caprinae)	0.143	NO	animal
+SAMN02253041	Food	Dairy	Dairy	0.212	YES	cheese,environmental/food/other,cheese food product:FOODON_00001013,dairy,food
+SAMN10078936	Livestock	Ovine/Goat (Caprinae)	Ovine/Goat (Caprinae)	0.143	YES	stomach content (Ovis aries),environmental/food/other,composition:PATO_0000025, ovis aries:NCBITAXON_9940, stomach:UBERON_0000945,veterinary clinical/research| other animal,animal
+SAMN17005521	Wild Animal	Avian	Ovine/Goat (Caprinae)	0.143	NO	liver franklin's full (Leucophaeus pipixcan),environmental/food/other,leucophaeus pipixcan:ncbitaxon_690715| liver:uberon_0002107,veterinary clinical/research| avian,animal
+SAMN05414425	Wild Animal	Rodent	Rodent	0.106	YES	intestine mouse,environmental/food/other,intestine:UBERON_0000160| mouse:NCIT_C14238,veterinary clinical/research| other animal,animal,mouse
+SAMN05417573	Companion Animal	Canine	Canine	0.11	YES	feces,Dog
+SAMN05414426	Wild Animal	Rodent	Rodent	0.106	YES	intestine mouse,environmental/food/other,intestine:UBERON_0000160| mouse:NCIT_C14238,veterinary clinical/research| other animal,animal,mouse
+SAMN05417585	Companion Animal	Canine	Canine	0.11	YES	feces,Dog
+SAMN31262485	Animal Feed	Unspecified Meat	Unspecified Meat	0.172	YES	Bone meal Animal feed,other
+SAMN09655767	Livestock	Swine	Invertebrate	0.085	NO	Product-Raw-Ground, Comminuted or Otherwise Nonintact-Pork
+SAMN02919096	Wild Animal	Amphibian	Invertebrate	0.212	NO	frog leg,environmental/food/other,frog leg:FOODON_00002567,other aquatic animals,food
+SAMN02918855	Environment	Soil/Dust	Soil/Dust	0.249	YES	environmental swab,environmental (swab or sampling):GENEPIO_0001732,environmental,environmental
+SAMN02918681	Animal Feed	Unspecified Meat	Unspecified Meat	0.177	YES	animal feed blood meal,environmental/food/other,animal feed:envo_02000047, blood meal:foodon_00001564,animal feed,Animal feed
+SAMN14755095	Poultry	Poultry	Poultry	0.124	YES	ground turkey
+SAMN31747275	Poultry	Poultry	Poultry	0.125	YES	chicken - young chicken carcass rinse (pre-evisceration)
+SAMN18148408	Environment	Animal-related	Animal-related	0.123	YES	Farm,Mink
+SAMN10461357	Environment	Environment	Soil/Dust	0.249	NO	environmental swab sponge,environmental/food/other,environmental-factory/production facility,environmental
+SAMN08607886	Companion Animal	Feline	Ovine/Goat (Caprinae)	0.143	NO	cat feces,environmental/food/other,cat:NCIT_C14191, feces:UBERON_0001988,veterinary clinical/research| companion animal,animal
+SAMN02678727	Food	Diary	Invertebrate	0.212	NO	fresh mexican style cheese,environmental/food/other,food fresh:FOODON_00002457|mexican:ANCESTRO_0415|cheese food product:FOODON_00001013,dairy,food
+SAMN14147087	Human	Human	Human	0.161	YES	human,Homo sapiens
+SAMN06671992	Food	Dairy	Dairy	0.212	YES	raw milk,environmental/food/other,food (raw):FOODON_03311126|milk:UBERON_0001913,dairy,food
+SAMN31064281	Animal Feed	Unspecified Meat	Unspecified Meat	0.172	YES	Bone meal Animal feed,other
+SAMN18527817	Companion Animal	Canine	Canine	0.108	YES	Stifle Fluid (Canis lupus familiaris)
+SAMN18527819	Livestock	Equine	Ovine/Goat (Caprinae)	0.127	NO	Intestine (Equus caballus)
+SAMN26927499	Environment	Animal-related	Ovine/Goat (Caprinae)	0.143	NO	manure,animal
+SAMN26927509	Environment	Animal-related	Ovine/Goat (Caprinae)	0.143	NO	manure,animal
+SAMN03464431	Environment	Water/River	Water/River	0.249	YES	water,water:CHEBI_15377,environmental-water,environmental
+SAMN03464114	Environment	Water/River	Water/River	0.249	YES	water,environmental/food/other,water:chebi_15377,environmental-water,environmental
+SAMN11127499	Wild Animal	Weasel/Badger (Mustelid)	Ovine/Goat (Caprinae)	0.143	NO	mustelid lung (Neovison vison),environmental/food/other,lung:UBERON_0002048, neovison vison:NCBITAXON_452646,veterinary clinical/research| other animal,animal
+SAMN29932888	Food	Unspecified Meat	Unspecified Meat	0.165	YES	meat,Salmonella gastroenteritis
+SAMN04444352	Poultry	Poultry	Poultry	0.126	YES	comminuted chicken
+SAMN07655740	Wild Animal	Bovine/Antelope	Ovine/Goat (Caprinae)	0.137	NO	Small intestine,Bison
+SAMN08734300	Environment	ND/Others	Soil/Dust	0.249	NO	environmental
+SAMN03165676	Wild Animal	Rabbit/Hare	Ovine/Goat (Caprinae)	0.091	NO	rabbit,rabbit:FOODON_03411323,other animal,animal,Oryctolagus cuniculus
+SAMN02182964	Poultry	Poultry	Poultry	0.212	YES	ground chicken,environmental/food/other,chicken (ground or minced):FOODON_03311826,chicken,food
+SAMN14677228	Environment	Animal-related	Animal-related	0.249	YES	drag swab litter farm,environmental/food/other,drag swab:obi_0002822| farm:envo_00000078| animal litter:envo_00002191,environmental-farm,environmental
