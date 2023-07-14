@@ -54,7 +54,6 @@ def print_comparison(a, b):
 def vectorize(text, nlp):
     # Get the SpaCy vector -- turning off other processing to speed things up
     # vector = nlp(text).vector
-    doc = nlp(text)
     vector = nlp(text)._.trf_data.tensors[0].reshape(-1, max(nlp(text)._.trf_data.tensors[0].shape)).squeeze().mean(axis=0)
     # vector = nlp(text)._.trf_data.tensors[-1]
     
@@ -74,7 +73,7 @@ def plot_cluster(df, yhat, c, cluster_out='cluster.png'):
     plt.savefig(cluster_out)    
     plt.clf()
 
-def main(entero_file:str ="entero_all_7.7.23.tsv.gz", out_dir:str='spacy', data_table:str="all_attributes.csv.gz", refresh:bool=False, training_num_records:int=5000, testing_num_records:int=50, model="en_core_web_trf"):
+def main(entero_file:str ="entero_all_7.7.23.tsv.gz", out_dir:str='spacy', data_table:str="all_attributes.csv.gz", refresh:bool=True, training_num_records:int=500, testing_num_records:int=50, model="en_core_web_trf"):
     if not os.path.exists('training_table.gz') or refresh:
         logging.info("Creating training and testing data tables...")
         # start with all_attributes.csv.gz
@@ -115,6 +114,9 @@ def main(entero_file:str ="entero_all_7.7.23.tsv.gz", out_dir:str='spacy', data_
     df = pd.DataFrame.from_dict(biosamples)
     source_types = list(set(source_types))
     logging.info(f"Creating vectors...")
+    # Clear everything in out_dir
+    for f in os.listdir(out_dir):
+        os.remove(os.path.join(out_dir, f))
     X = normalize(np.stack(vectorize(t, nlp) for t in df['vector_text']))
     logging.info("X (the document matrix) has shape: {}".format(X.shape))
     logging.info("That means it has {} rows and {} columns".format(X.shape[0], X.shape[1]))
