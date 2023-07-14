@@ -31,3 +31,5 @@ There's a long winded [explanation of the movitations here](doc/motivations.md).
 * Repeat classification testing above.
 
 https://derrickofori015.medium.com/gpt-3-vs-other-text-embeddings-techniques-for-text-classification-a-performance-evaluation-b3a3e6e84cb7
+
+https://www.cdc.gov/foodsafety/ifsac/projects/food-categorization-scheme.html

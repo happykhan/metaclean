@@ -18,14 +18,13 @@ import matplotlib.pyplot as plt
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
-def create_or_load_tables(entero_file, data_table, training_num_records, testing_num_records, refresh=False):
+def create_or_load_tables(entero_file, data_table, training_num_records, refresh=False):
     """
     Creates or loads training and testing data tables from a given file.
     Args:
         entero_file (str): The path to the file containing the data.
         data_table (str): The name of the table to be created.
         training_num_records (int): The number of records to use for training.
-        testing_num_records (int): The number of records to use for testing.
         refresh (bool): Whether to refresh the data tables if they already exist.
     Returns:
         tuple: A tuple containing the training and testing data tables.
@@ -35,24 +34,20 @@ def create_or_load_tables(entero_file, data_table, training_num_records, testing
         >>> entero_file = "path/to/data.csv"
         >>> data_table = "my_data_table"
         >>> training_num_records = 1000
-        >>> testing_num_records = 100
-        >>> create_or_load_tables(entero_file, data_table, training_num_records, testing_num_records, refresh=True)
+        >>> create_or_load_tables(entero_file, data_table, training_num_records, refresh=True)
         ({...}, {...})
     """
     # TODO: Rewrite create_dataframe to return a dataframe instead of a dictionary
     if not os.path.exists('training_table.gz') or refresh:
         logging.info("Creating training and testing data tables")
-        training_data_table, testing_data_table = create_dataframe(entero_file, data_table, training_num_records=training_num_records, testing_num_records=testing_num_records)
+        training_data_table = create_dataframe(entero_file, data_table, training_num_records=training_num_records, equal_sampling=True)
         # write testing_data_table to gz file
         with gzip.open('training_table.gz', 'wt') as f:
             f.write(json.dumps(training_data_table))
-        with gzip.open('testing_table.gz', 'wt') as f:
-            f.write(json.dumps(testing_data_table))
     else:
         logging.info("Using existing training and testing data tables")
         training_data_table = json.loads(gzip.open('training_table.gz', 'rt').read())
-        testing_data_table = json.loads(gzip.open('testing_table.gz', 'rt').read())    
-    return training_data_table, testing_data_table
+    return training_data_table
 
 def clean_value(value):
     """
@@ -87,16 +82,11 @@ def clean_biosample(biosample):
         'soil environment'    
     """
     biosample_dict = biosample.to_dict()
-    VALID_FIELDS = ['isolation_source', 'source_type' ,'host']
+    VALID_FIELDS = ['isolation_source'] # , 'source_type' ,'host']
     cleaned_biosample= []
-    if biosample_dict.get('isolation_source') and not pd.isna(biosample_dict['isolation_source']):      
-        cleaned_biosample.append(clean_value(biosample_dict.get('isolation_source')))
-    if biosample_dict.get('host') and not pd.isna(biosample_dict['host']):    
-        cleaned_biosample.append('animal_host')
-        cleaned_biosample.append(clean_value(biosample_dict.get('host')))
-    if biosample_dict.get('source_type') and not pd.isna(biosample_dict['source_type']):    
-        cleaned_biosample.append('source_type')
-        cleaned_biosample.append(clean_value(biosample_dict.get('source_type')))        
+    for field in VALID_FIELDS:
+        if biosample_dict.get(field) and not pd.isna(biosample_dict[field]):
+            cleaned_biosample.append(clean_value(biosample_dict[field]))
     cleaned_biosample_string = ' '.join(cleaned_biosample)
     print({k: v for k, v in biosample_dict.items() if not pd.isna(v)})
     print(cleaned_biosample_string)
@@ -128,7 +118,7 @@ def word2vec(text, nlp, wv):
             continue
         filtered_tokens.append(token.lemma_)
     if not filtered_tokens:
-        return np.nan
+        return np.zeros(300)
     else:
         return wv.get_mean_vector(filtered_tokens)
 
@@ -140,7 +130,7 @@ def tfidf_vectorize(text_list):
     Returns:
         list: The TF-IDF vector representation of the texts.
     Notes:
-        This function uses the TfidfVectorizer class from scikit-learn to calculate the TF-IDF vector representation of the texts. The resulting vectors are converted to a dense matrix and returned as a list. The function also prints the top keywords for the first text in the list.
+        This function uses the TfidfVectorizer class from scikit-learn to calculate the TF-IDF vector representation of the texts. The resulting vectors are converted to a dense matrix and returned as a list. 
     Examples:
         >>> text_list = ["This is a test sentence.", "This is another test sentence."]
         >>> tfidf_vectorize(text_list)
@@ -148,9 +138,9 @@ def tfidf_vectorize(text_list):
     """
     vectorizer = TfidfVectorizer(
                                 lowercase=True,
-                                max_features=100,
+                                max_features=300,
                                 max_df=0.7,
-                                min_df=3,
+                                min_df=2,
                                 ngram_range = (1,3),
                                 stop_words = "english"
 
@@ -159,18 +149,6 @@ def tfidf_vectorize(text_list):
     feature_names = vectorizer.get_feature_names_out()    
     dense = vectors.todense()
     denselist = dense.tolist()
-
-    all_keywords = []
-
-    for description in denselist:
-        x=0
-        keywords = []
-        for word in description:
-            if word > 0:
-                keywords.append(feature_names[x])
-            x=x+1
-        all_keywords.append(keywords)
-    print (all_keywords[0])
     return denselist
 
 def plot_groups(X, y, groups, out='plot_group.png'):
@@ -194,7 +172,7 @@ def plot_groups(X, y, groups, out='plot_group.png'):
     for group in groups:
         plt.scatter(X[y == group, 0], X[y == group, 1], label=group, alpha=0.4)
     # Make figure bigger
-    plt.gcf().set_size_inches(10, 10)
+    plt.gcf().set_size_inches(8, 10)
     plt.legend()
     plt.savefig(out)    
     plt.clf()
@@ -220,7 +198,23 @@ def plot_cluster(df, yhat, c, cluster_out='cluster.png'):
     plt.savefig(cluster_out)    
     plt.clf()
 
-def clustering(df, method, out_dir, nlp):
+def calculate_WSS(points, kmax=30):
+  sse = []
+  for k in range(1, kmax+1):
+    kmeans = KMeans(n_clusters = k).fit(points)
+    centroids = kmeans.cluster_centers_
+    pred_clusters = kmeans.predict(points)
+    curr_sse = 0
+    
+    # calculate square of Euclidean distance of each point from its cluster center and add to current WSS
+    for i in range(len(points)):
+      curr_center = centroids[pred_clusters[i]]
+      curr_sse += (points[i, 0] - curr_center[0]) ** 2 + (points[i, 1] - curr_center[1]) ** 2
+      
+    sse.append(curr_sse)
+  return sse
+
+def clustering(df, method, out_dir, nlp, wss=False):
     """
     Performs clustering on a DataFrame using KMeans algorithm and plots the results.
     Args:
@@ -249,24 +243,32 @@ def clustering(df, method, out_dir, nlp):
     plot_groups(X2, df['EB Source Type'], source_types, out=f'{out_dir}/{method}_plot_EB_groups.png')
 
     # First we fit the model...
-    k_means = KMeans(n_clusters=len(source_types), random_state=1)
+    if wss:
+        z = calculate_WSS(X)
+        plt.plot(range(1,31), z)
+        plt.xlabel('Number of clusters')
+        plt.ylabel('WSS')
+        plt.savefig(f'{out_dir}/{method}_wss.png')
+        plt.clf()   
+    CLUSTERS = 5 # OR len(source_types)
+    k_means = KMeans(n_clusters=CLUSTERS, random_state=1)
     k_means.fit(X)
     # Let's take a look at the distribution across classes
     yhat = k_means.predict(X)
     # Clear the plot
-    plt.hist(yhat, bins=range(len(source_types)))
+    plt.hist(yhat, bins=range(CLUSTERS))
     # Write to plot to file
     plt.savefig(f'{out_dir}/{method}_cluster_distribution.png')    
     plt.clf()
-    plot_groups(X2, yhat, range(len(source_types)), out=f'{out_dir}/{method}_plot_kmeans_groups.png')
-    for c in range(len(source_types)):
+    plot_groups(X2, yhat, range(CLUSTERS), out=f'{out_dir}/{method}_plot_kmeans_groups.png')
+    for c in range(CLUSTERS):
         plot_cluster(df, yhat, c, cluster_out=f'{out_dir}/{method}_cluster_{c}.png')
     # Output df with new column for cluster
     df[f'{method}_cluster'] = yhat
     return df
 
 
-def main(data_table:str="all_attributes.csv.gz", out_dir:str='clustering', entero_file:str ="entero_all_7.7.23.tsv.gz", refresh:bool=False, training_num_records:int=300, testing_num_records:int=300):
+def main(data_table:str="all_attributes.csv.gz", out_dir:str='clustering', entero_file:str ="entero_all_7.7.23.tsv.gz", refresh:bool=True, training_num_records:int=1000):
     """
     Prepare data for machine learning models.
 
@@ -281,7 +283,7 @@ def main(data_table:str="all_attributes.csv.gz", out_dir:str='clustering', enter
         None
     """    
     logging.info("Preparing data...")
-    training_data_table, testing_data_table = create_or_load_tables(entero_file, data_table, training_num_records, testing_num_records, refresh)
+    training_data_table = create_or_load_tables(entero_file, data_table, training_num_records, refresh)
 
     df = pd.DataFrame.from_dict(training_data_table.values())
     # Add a new column with the cleaned host string
@@ -313,11 +315,12 @@ def main(data_table:str="all_attributes.csv.gz", out_dir:str='clustering', enter
 
     # Output clustering
     logging.info("Clustering starts...")
-    methods = ['tfidf', 'mpnet', 'word2vec', 'glove']
+    methods = ['tfidf', 'mpnet', 'glove', 'word2vec']
     # assign data of lists.  
     data = {'Name': methods,
          'Dimension': [len(df.tfidf[0]), len(df.mpnet[0]), len(df.word2vec[0]), len(df.glove[0])]}  
-    print(data)
+    # data to csv
+    pd.DataFrame(data).to_csv('dimension.csv', index=False)
     os.makedirs(out_dir, exist_ok=True)
     for f in os.listdir(out_dir):
         os.remove(os.path.join(out_dir, f))    
@@ -325,9 +328,7 @@ def main(data_table:str="all_attributes.csv.gz", out_dir:str='clustering', enter
         logging.info(f"Clustering {method}...")
         df = clustering(df, method, out_dir, nlp)
     df.to_csv('full_frame.gz', compression='gzip', index=False)
-    logging.info("Clustering ends...")
-
-        
+    logging.info("Clustering ends")      
 
 if __name__ == "__main__":
     typer.run(main)

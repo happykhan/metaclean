@@ -1,0 +1,5 @@
+Name,Dimension
+tfidf,300
+mpnet,768
+glove,300
+word2vec,300
